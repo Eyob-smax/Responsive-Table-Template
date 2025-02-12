@@ -11,12 +11,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
   </head>
-  <body>
+  <body class="">
     <div class="theme-toggle" id="theme-toggle">Dark Mode</div>
     <div class="container">
       <h1>Most Active Users</h1>
       <!-- ?Loader -->
-      <div class="spinner" id="spinner">
+      <div class="spinner" hidden id="spinner">
         <i class="fas fa-sync fa-spin"> </i>
       </div>
 
@@ -74,7 +74,7 @@
 
       <!-- ?Pagination -- class -->
       <div class="pagination">
-        <button id="prev-btn" class="btn">
+        <button id="prev-btn" class="btn" disabled>
           <i class="fas fa-angle-left"></i>
         </button>
         <span class="page-number">1</span>
