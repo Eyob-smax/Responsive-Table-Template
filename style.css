@@ -40,6 +40,8 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  transition: 0.1s;
 }
 
 .container {
