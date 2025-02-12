@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Table</title>
+    <link rel="icon" href="../images/image.png" type="image/png" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="theme-toggle" id="theme-toggle">Dark Mode</div>
+    <div class="container">
+      <h1>Most Active Users</h1>
+      <!-- ?Loader -->
+      <div class="spinner" id="spinner">
+        <i class="fas fa-sync fa-spin"> </i>
+      </div>
+
+      <!-- ?Table -->
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th class="name-column">
+              Name <i class="fas fa-sort" id="icon-0"></i>
+            </th>
+            <th class="email-column">
+              Email <i class="fas fa-sort" id="icon-1"></i>
+            </th>
+            <th class="username-column">
+              Username <i class="fas fa-sort" id="icon-2"></i>
+            </th>
+            <th class="country-column">
+              Country <i class="fas fa-sort" id="icon-3"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name Here</td>
+            <td>Email Here</td>
+            <td>Username Here</td>
+            <td>Country Here</td>
+          </tr>
+          <tr>
+            <td>Name Here</td>
+            <td>Email Here</td>
+            <td>Username Here</td>
+            <td>Country Here</td>
+          </tr>
+          <tr>
+            <td>Name Here</td>
+            <td>Email Here</td>
+            <td>Username Here</td>
+            <td>Country Here</td>
+          </tr>
+          <tr>
+            <td>Name Here</td>
+            <td>Email Here</td>
+            <td>Username Here</td>
+            <td>Country Here</td>
+          </tr>
+          <tr>
+            <td>Name Here</td>
+            <td>Email Here</td>
+            <td>Username Here</td>
+            <td>Country Here</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ?Pagination -- class -->
+      <div class="pagination">
+        <button id="prev-btn" class="btn">
+          <i class="fas fa-angle-left"></i>
+        </button>
+        <span class="page-number">1</span>
+        <button id="next-btn" class="btn">
+          <i class="fas fa-angle-right"></i>
+        </button>
+      </div>
+    </div>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
