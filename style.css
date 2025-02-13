@@ -32,6 +32,7 @@ body {
   min-height: 100vh;
   font-family: "Roboto", sans-serif;
   padding: calc(20rem / 16);
+  padding-top: 25px;
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -49,6 +50,12 @@ body {
   height: calc(600rem / 16);
   position: relative;
   top: -25%;
+  max-height: 85vh;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+
+  scrollbar-color: transparent var(--background-color);
 }
 
 h1 {
@@ -75,6 +82,8 @@ table {
   overflow: hidden;
   border-spacing: 0;
   margin-bottom: 20px;
+
+  border: 1px solid #000;
 }
 
 th,
@@ -169,7 +178,7 @@ tr {
 
 @media (width<=508px) {
   body {
-    padding-top: 80px;
+    padding-top: 60px;
     align-items: flex-start;
     overflow: auto;
   }

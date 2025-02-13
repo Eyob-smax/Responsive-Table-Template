@@ -11,34 +11,34 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
   </head>
-  <body class="">
+  <body>
     <div class="theme-toggle" id="theme-toggle">Dark Mode</div>
     <div class="container">
       <h1>Most Active Users</h1>
       <!-- ?Loader -->
-      <div class="spinner" hidden id="spinner">
+      <div class="spinner" style="display: none" id="spinner">
         <i class="fas fa-sync fa-spin"> </i>
       </div>
 
       <!-- ?Table -->
-      <table id="data-table">
+      <table id="data-table" style="display: none">
         <thead>
           <tr>
-            <th class="name-column">
+            <th class="name-column" data-id="name">
               Name <i class="fas fa-sort" id="icon-0"></i>
             </th>
-            <th class="email-column">
+            <th class="email-column" data-id="email">
               Email <i class="fas fa-sort" id="icon-1"></i>
             </th>
-            <th class="username-column">
+            <th class="username-column" data-id="username">
               Username <i class="fas fa-sort" id="icon-2"></i>
             </th>
-            <th class="country-column">
+            <th class="country-column" data-id="country">
               Country <i class="fas fa-sort" id="icon-3"></i>
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="table-body">
           <tr>
             <td data-label="Name">Name Here</td>
             <td data-label="Email">Email Here</td>
@@ -69,7 +69,6 @@
             <td data-label="Username">Username Here</td>
             <td data-label="Country">Country Here</td>
           </tr>
-
           <tr>
             <td data-label="Name">Name Here</td>
             <td data-label="Email">Email Here</td>
@@ -90,9 +89,8 @@
           </tr>
         </tbody>
       </table>
-
       <!-- ?Pagination -- class -->
-      <div class="pagination">
+      <div class="pagination" style="display: none">
         <button id="prev-btn" class="btn" disabled>
           <i class="fas fa-angle-left"></i>
         </button>
@@ -102,11 +100,14 @@
         </button>
       </div>
     </div>
-    <script defer>
+    <script>
       const darkToggler = document.getElementById("theme-toggle");
 
       darkToggler.addEventListener("click", () => {
         document.body.classList.toggle("dark-mode");
+        darkToggler.textContent = document.body.classList.contains("dark-mode")
+          ? "Light Mode"
+          : "Dark Mode";
         localStorage.setItem(
           "dark",
           document.body.classList.contains("dark-mode")
@@ -115,7 +116,10 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         if (localStorage.getItem("dark") === "true") {
+          darkToggler.textContent = "Light Mode";
           document.body.classList.add("dark-mode");
+        } else {
+          darkToggler.textContent = "Dark Mode";
         }
       });
     </script>
