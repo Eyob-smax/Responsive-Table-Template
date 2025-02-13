@@ -91,7 +91,7 @@
       </table>
       <!-- ?Pagination -- class -->
       <div class="pagination" style="display: none">
-        <button id="prev-btn" class="btn" disabled>
+        <button id="prev-btn" class="btn">
           <i class="fas fa-angle-left"></i>
         </button>
         <span class="page-number">1</span>
@@ -122,6 +122,12 @@
           darkToggler.textContent = "Dark Mode";
         }
       });
+
+      function updateButtons() {
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalNumberOfPages;
+        paginationSpan.innerText = currentPage;
+      }
     </script>
     <script type="module" src="script.js"></script>
   </body>

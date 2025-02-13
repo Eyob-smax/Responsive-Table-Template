@@ -11,6 +11,8 @@ let data = [];
 let currentPage = 1;
 const rowsPerPage = 5;
 let totalNumberOfPages = 0;
+let sortDirection = {};
+let sortedData = [];
 
 paginationSpan.textContent = currentPage;
 
@@ -27,8 +29,9 @@ async function fetchUserData() {
       username: user.login.username,
       country: user.location.country,
     }));
-
-    displayUsers(data);
+    sortedData = [...data];
+    displayUsers(sortedData);
+    updateButtons();
     console.log(data);
   } catch (error) {
     console.log(error);
@@ -44,51 +47,28 @@ await fetchUserData();
 tableHead.forEach((head) => {
   head.addEventListener("click", () => {
     const property = head.dataset.id;
-    sortByHead(data, property);
+    sortByHead(sortedData, property);
   });
 });
 
 totalNumberOfPages = Math.floor(data.length / rowsPerPage);
 paginationSpan.textContent = currentPage;
 
-function displayNext() {
-  prevBtn.disabled = false;
-  paginationSpan.textContent = currentPage;
-  if (totalNumberOfPages > currentPage) {
-    currentPage++;
-    paginationSpan.textContent = currentPage;
-  } else if (currentPage === 1) {
-    nextBtn.disabled = true;
-    prevBtn.disabled = false;
-  } else {
-    nextBtn.disabled = true;
-    prevBtn.disabled = false;
-  }
-
-  displayUsers(data);
-}
-
-function displayPrev() {
-  nextBtn.disabled = false;
-  paginationSpan.textContent = currentPage;
-
+function prevPage() {
   if (currentPage > 1) {
     currentPage--;
-    paginationSpan.textContent = currentPage;
-  } else if (currentPage === totalNumberOfPages) {
-    nextBtn.disabled = false;
-    prevBtn.disabled = true;
-  } else {
-    nextBtn.disabled = false;
-    prevBtn.disabled = true;
+    displayUsers(sortedData);
+    updateButtons();
   }
-
-  displayUsers(data);
 }
 
-nextBtn.addEventListener("click", displayNext);
-prevBtn.addEventListener("click", displayPrev);
-console.log(totalNumberOfPages);
+function nextPage() {
+  if (currentPage < totalNumberOfPages) {
+    currentPage++;
+    displayUsers(sortedData);
+    updateButtons();
+  }
+}
 
 function displayUsers(users) {
   tableBody.innerHTML = "";
@@ -113,13 +93,56 @@ function displayUsers(users) {
 }
 
 function sortByHead(data, property) {
+  clearSortIcon();
+  updateSortIcon(property, sortDirection);
+
+  if (sortDirection[property] === "asc") {
+    sortDirection[property] = "desc";
+  } else {
+    sortDirection[property] = "asc";
+  }
   let sortedData = data
     .map((item) => ({
       item,
       sortKey: item[property].toLowerCase(),
     }))
-    .sort((a, b) => a.sortKey.localeCompare(b.sortKey))
+    .sort((a, b) => {
+      if (sortDirection[property] === "asc") {
+        return a.sortKey.localeCompare(b.sortKey);
+      } else {
+        return b.sortKey.localeCompare(a.sortKey);
+      }
+    })
     .map(({ item }) => item);
 
   displayUsers(sortedData);
 }
+
+function updateButtons() {
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage === totalNumberOfPages;
+  paginationSpan.innerText = currentPage;
+}
+
+function updateSortIcon(property) {
+  tableHead.forEach((head) => {
+    if (head.dataset.id === property) {
+      if (sortDirection[property] === "asc") {
+        head.innerHTML = `Name <i class="fas fa-sort-down" id="icon-0"></i>`;
+      } else {
+        head.innerHTML = `Name <i class="fas fa-sort-up" id="icon-0"></i>`;
+      }
+    } else {
+      head.style.color = "white";
+    }
+  });
+}
+
+function clearSortIcon() {
+  tableHead.forEach((head) => {
+    head.innerHTML = `Name <i class="fas fa-sort" id="icon-0"></i>`;
+  });
+}
+
+prevBtn.addEventListener("click", prevPage);
+nextBtn.addEventListener("click", nextPage);
